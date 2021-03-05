@@ -1,0 +1,9 @@
+body{
+  background: rgb(19,21,26);
+  background: linear-gradient(243deg, rgba(19,21,26,1) 0%, rgba(26,28,36,1) 100%);
+  
+justify-content: center;
+align-items: center;
+
+font-family:arial;
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceder crédito</title>
+    <link type="text/css" rel="stylesheet" href="estatico/css/bootstrap.min.css">
+</head>
+<body>
+    
+<center>
+    <h2>Conceder crédito a cliente</h2>
+    <h4>Preencha os dados abaixo corretamente para fazer a a analise de crédito do cliente</h4>
+
+
+
+    <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="nome" style="height:50px;">
+        <label for="floatingInput">Nome do cliente</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="score" style="height:50px;">
+        <label for="floatingInput">Score do cliente no bureau de crédito(0-1000)</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="dividas" style="height:50px;">
+        <label for="floatingInput">Valor das dividas no cpf do cliente(0 se não houver)</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="tempodecasa" style="height:50px;">
+        <label for="floatingInput">Tempo em meses desde a criação da conta do cliente no banco(0 se não houver)</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="debito" style="height:50px;">
+        <label for="floatingInput">Valor transacionado no débito em conta nos ultimos 3 meses.</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="cc" style="height:50px;">
+        <label for="floatingInput">Valor transacionado no crédito nos ultimos 3 meses.</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="outroscc" style="height:50px;">
+        <label for="floatingInput">Quantidade de contratos de outros cartões de crédito(0 se não houver).</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="ccatrasados" style="height:50px;">
+        <label for="floatingInput">valor de contas atrasadas de todos os cartões do cliente nos ultimos 3 meses.</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="portabilidade" style="height:50px;">
+        <label for="floatingInput">valor da portabilidade de salãrio(0 se náo houver)</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+
+      <div class="form-floating mb-3" style="width:70%;">
+        <input type="text" class="form-control" id="faturasoutrocc" style="height:50px;">
+        <label for="floatingInput">Valor total das ultimas 3 faturas pagas em dia de outros cartões</label>
+        <div id="mensagemerro" class="invalid-feedback">
+         .....
+        </div>
+      </div>
+
+      <select class="form-select" aria-label="Default select example" id="exigencia" style="width:70%;">
+        <option selected value="0">Selecione a exigencia.</option>
+        <option value="1">Fácil</option>
+        <option value="2">Médio</option>
+        <option value="3">Dificil</option>
+      </select>
+
+      <button type="button" class="btn btn-success" onclick="analise()"  data-bs-toggle="modal" data-bs-target="#exampleModal">Fazer analise</button>
+</center>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Analise do cliente:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalbody">
+        <h2>Carregando...</h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <script src="estatico/js/jquery.min.js"></script>
+<script src="estatico/js/bootstrap.min.js"></script>
+
+<script>
+    function analise(){
+        var nome = document.getElementById('nome').value;
+        var score = document.getElementById('score').value;
+        var dividas = document.getElementById('dividas').value;
+        var tempodecasa = document.getElementById('tempodecasa').value;
+        var debito = document.getElementById('debito').value;
+        var cc = document.getElementById('cc').value;
+        var outroscc = document.getElementById('outroscc').value;
+        var ccatrasados = document.getElementById('ccatrasados').value;
+        var portabilidade = document.getElementById('portabilidade').value;
+        var faturasoutrocc = document.getElementById('faturasoutrocc').value;
+        var exigencia = document.getElementById('exigencia').value;
+            var xhttp = new XMLHttpRequest();
+xhttp.open("POST", 'api-analise', true);
+var params = 'score=' + score + '&dividas=' + dividas + '&tempodecasa=' + tempodecasa + '&debito=' + debito + '&cc=' + cc + '&outroscc=' + outroscc + '&ccatrasados=' + ccatrasados + '&portabilidade=' + portabilidade + '&faturasoutrocc=' + faturasoutrocc + "&exigencia=" + exigencia;
+xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+xhttp.send(params);
+
+xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == XMLHttpRequest.DONE) {
+      if(xhttp.status == 200)
+      {
+var dados = JSON.parse(xhttp.responseText);
+if(dados.aumento > 0)
+{
+document.getElementById('modalbody').innerHTML = "<h2>Limite disponivel: " + dados.aumento + "</h2> <h4>Principais causas que impedem alto crédito:" + dados.motivosqueabaixam +"</h4>";
+}else{
+  document.getElementById('modalbody').innerHTML = "<h2>Não recomendado aumento de limite!</h2> <br> <h4>Principais causas que impedem alto crédito:" + dados.motivosqueabaixam +"</h4>";
+
+}
+    }
+    }
+}
+
+
+    }
+
+</script>
+</body>
+</html>
